@@ -6,7 +6,7 @@ script:
   - docker images hdfelix/react-example
 
 before_deploy:
-  - docker login -u ENV['DOCKERHUB_USERNAME] -p ENV['DOCKERHUB_PASSWORD'] 
+  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 deploy:
   provider: script
