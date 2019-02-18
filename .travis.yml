@@ -2,4 +2,14 @@ sudo: required
 services:
   - docker
 script:
-  - docker build -t react-app .
+  - docker build -t hdfelix/react-example .
+  - docker images hdfelix/react-example
+
+before_deploy:
+  - docker login -u ENV['DOCKERHUB_USERNAME] -p ENV['DOCKERHUB_PASSWORD'] 
+
+deploy:
+  provider: script
+  script: docker push hdfelix/react-example
+  on:
+    branch: master
